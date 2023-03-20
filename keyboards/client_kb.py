@@ -20,3 +20,38 @@ start_markup.add(
     share_location,
     share_contact
 )
+
+cancel_markup = ReplyKeyboardMarkup(
+    resize_keyboard=True,
+    one_time_keyboard=True,
+).add(
+    KeyboardButton("Отмена")
+)
+
+submit_markup = ReplyKeyboardMarkup(
+    resize_keyboard=True,
+    one_time_keyboard=True
+).add(
+    KeyboardButton("ДА"),
+    KeyboardButton("ЗАНОВО"),
+    KeyboardButton("ОТМЕНА")
+)
+
+direction_markup = ReplyKeyboardMarkup(
+    resize_keyboard=True,
+    one_time_keyboard=True
+).add(
+    KeyboardButton("Python"),
+    KeyboardButton("Java"),
+    KeyboardButton("Android(Kotlin)"),
+    KeyboardButton("UX design"),
+)
+
+group_markup = ReplyKeyboardMarkup(
+    resize_keyboard=True,
+    one_time_keyboard=True
+).add(
+    KeyboardButton('27'),
+    KeyboardButton('28'),
+    KeyboardButton('29'),
+)

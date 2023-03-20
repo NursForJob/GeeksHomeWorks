@@ -28,6 +28,7 @@ async def mem_commands(message: types.Message):
         photo
     )
 
+
 async def dice_commands(message: types.Message):    # Игра dice
         if message.chat.type != 'private':
                 await bot.send_message(message.chat.id, 'Для бота')
