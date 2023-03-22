@@ -3,6 +3,8 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from keyboards import client_kb
+from database.bot_db import sql_insert
+from config import ADMINS
 
 
 class FSMAdmin(StatesGroup):
@@ -14,11 +16,14 @@ class FSMAdmin(StatesGroup):
 
 
 async def fsm_start(message: types.Message):
-    if message.chat.type == 'private':
-        await FSMAdmin.name.set()
-        await message.answer("Как зовут?", reply_markup=client_kb.cancel_markup)
+    if message.from_user.id not in ADMINS:
+        await message.answer('Ты не админ!')
     else:
-        await message.answer('Пиши в личку', reply_markup=client_kb.cancel_markup)
+        if message.chat.type == 'private':
+            await FSMAdmin.name.set()
+            await message.answer("Как зовут?", reply_markup=client_kb.cancel_markup)
+        else:
+            await message.answer('Пиши в личку', reply_markup=client_kb.cancel_markup)
 
 
 async def load_name(message: types.Message, state: FSMContext):
@@ -63,6 +68,7 @@ async def load_group(message: types.Message, state:FSMContext):
 async def submit(message: types.Message, state:FSMContext):
     if message.text == "ДА":
         # Запись в БД
+        await sql_insert(state)
         await state.finish()
         await message.answer("Ты зареган!")
     elif message.text == "ЗАНОВО":

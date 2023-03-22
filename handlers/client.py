@@ -4,6 +4,7 @@ from config import bot,ADMINS
 from keyboards.client_kb import start_markup
 import time
 
+
 # @dp.message_handler(commands=['start'])
 async def start_command(message: types.Message):
     await bot.send_message(
@@ -20,9 +21,10 @@ async def help_command(message: types.Message):
         f"Разбирайся сам!"
     )
 
+
 # @dp.message_handler(commands=['mem'])
 async def mem_commands(message: types.Message):
-    photo = open("Troll-Face-Meme-PNG.png", 'rb')
+    photo = open("media/Troll-Face-Meme-PNG.png", 'rb')
     await bot.send_photo(
         message.chat.id,
         photo
