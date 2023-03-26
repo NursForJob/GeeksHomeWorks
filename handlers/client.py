@@ -3,6 +3,7 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from config import bot,ADMINS
 from keyboards.client_kb import start_markup
 import time
+from database.bot_db import sql_command_all
 
 
 # @dp.message_handler(commands=['start'])
@@ -79,9 +80,23 @@ async def quiz_1(message: types.Message):
         reply_markup=markup
     )
 
+
+async def all_users_command(message: types.Message):
+    users = await sql_command_all()
+    for user in users:
+        await message.answer(f"Id: {user[0]}\n"
+                             f"username: {user[1]}\n"
+                             f"Name: {user[2]}\n"
+                             f"Language: {user[3]}\n"
+                             f"Age: {user[4]}"
+                             f"Group: {user[5]}\n\n")
+
+
 def register_handlers_client(dp: Dispatcher):
+    dp.register_message_handler(all_users_command, commands=['users'])
     dp.register_message_handler(start_command, commands=['start'])
     dp.register_message_handler(help_command, commands=['help'])
     dp.register_message_handler(quiz_1, commands=['quiz'])
     dp.register_message_handler(mem_commands, commands=['mem'])
     dp.register_message_handler(dice_commands,commands=['dice'])
+

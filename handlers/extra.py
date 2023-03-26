@@ -7,9 +7,9 @@ async def echo(message: types.Message):
     if isNum == True:
         num = int(message.text)
         res = num ** 2
-        await bot.send_message(message.from_user.id,res)
+        await bot.send_message(message.chat.id,res)
     else:
-        await bot.send_message(message.from_user.id, message.text)
+        await bot.send_message(message.chat.id, message.text)
 
     if message.text.startswith('!pin'):   #Закрепеление сообщения
         if message.chat.type != 'private':
