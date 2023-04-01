@@ -4,6 +4,7 @@ from config import bot,ADMINS
 from keyboards.client_kb import start_markup
 import time
 from database.bot_db import sql_command_all
+from parser.news import parser
 
 
 # @dp.message_handler(commands=['start'])
@@ -92,6 +93,18 @@ async def all_users_command(message: types.Message):
                              f"Group: {user[5]}\n\n")
 
 
+async def get_news(message: types.Message):
+    news = parser()
+    for new in news:
+        await message.answer(
+            f"{new['title']}\n"
+            f"{new['url']}",
+            reply_markup=InlineKeyboardMarkup().add(
+                InlineKeyboardButton("Смотреть!",url=new['url'])
+            )
+        )
+
+
 def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(all_users_command, commands=['users'])
     dp.register_message_handler(start_command, commands=['start'])
@@ -99,4 +112,5 @@ def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(quiz_1, commands=['quiz'])
     dp.register_message_handler(mem_commands, commands=['mem'])
     dp.register_message_handler(dice_commands,commands=['dice'])
+    dp.register_message_handler(get_news, commands=['news'])
 

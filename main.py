@@ -6,7 +6,6 @@ from handlers import client, callback, extra, FSMAdminMentor,admin
 from database.bot_db import sql_create
 from handlers.shedule import set_shedule
 
-
 async def on_startup(_):
     await set_shedule()
     await bot.send_message(ADMINS[0], 'Я родился')

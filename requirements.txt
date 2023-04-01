@@ -14,7 +14,9 @@ multidict==6.0.3
 python-decouple==3.7
 pytz==2022.7
 pytz-deprecation-shim==0.1.0.post0
+requests==2.28.2
 six==1.16.0
 tzdata==2023.2
 tzlocal==4.3
+urllib3==1.26.15
 yarl==1.8.2
