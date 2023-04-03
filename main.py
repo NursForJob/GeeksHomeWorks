@@ -2,9 +2,10 @@ from aiogram.utils import executor
 import logging
 
 from config import dp, bot, ADMINS
-from handlers import client, callback, extra, FSMAdminMentor,admin
+from handlers import client, callback, extra, FSMAdminMentor,admin,FSMQrCodeGenerator
 from database.bot_db import sql_create
 from handlers.shedule import set_shedule
+
 
 async def on_startup(_):
     await set_shedule()
@@ -19,12 +20,10 @@ admin.register_handler_admin(dp)
 client.register_handlers_client(dp)
 callback.register_handlers_callback(dp)
 FSMAdminMentor.register_handlers_FSM_anketa(dp)
-
+FSMQrCodeGenerator.register_message_handler(dp)
 extra.register_handlers_callback(dp)
 
 
-# def on_startup(dp):
-#     await bot.send_message(ADMINS)
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)

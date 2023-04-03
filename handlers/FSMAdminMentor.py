@@ -78,7 +78,7 @@ async def submit(message: types.Message, state:FSMContext):
         await message.answer("НИПОНЯЛ!?")
 
 
-async def cancel(message:types.Message, state:FSMContext):
+async def cancel(message: types.Message, state:FSMContext):
     current_state = state.get_state()
     if current_state:
         await state.finish()

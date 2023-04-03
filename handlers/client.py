@@ -7,6 +7,7 @@ from database.bot_db import sql_command_all
 from parser.news import parser
 
 
+
 # @dp.message_handler(commands=['start'])
 async def start_command(message: types.Message):
     await bot.send_message(
@@ -97,8 +98,8 @@ async def get_news(message: types.Message):
     news = parser()
     for new in news:
         await message.answer(
-            f"{new['title']}\n"
-            f"{new['url']}",
+            f"{new['title']}\n\n"
+            f"{new['url']}\n",
             reply_markup=InlineKeyboardMarkup().add(
                 InlineKeyboardButton("Смотреть!",url=new['url'])
             )
